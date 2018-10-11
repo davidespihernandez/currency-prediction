@@ -124,3 +124,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(name)s %(levelname)s %(message)s',
+)

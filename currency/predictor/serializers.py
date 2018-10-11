@@ -22,3 +22,9 @@ class ExchangeMessageSerializer(serializers.Serializer):
     rates = serializers.DictField(
         child=serializers.DecimalField(decimal_places=6, max_digits=14)
     )
+
+
+class ExchangeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Exchange
+        fields = '__all__'
