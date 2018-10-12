@@ -1,8 +1,8 @@
-import logging
 import time
-import requests, logging
-
 from datetime import timedelta
+
+import logging
+import requests
 
 from predictor.models import Exchange
 from predictor.serializers import ExchangeMessageSerializer
