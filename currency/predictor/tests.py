@@ -3,9 +3,13 @@ from decimal import Decimal
 from unittest import mock
 
 from django.test import TestCase
+from django.urls import reverse
+from rest_framework.test import APITestCase
 
+from predictor.builder import Builder
 from predictor.loader import ExchangeLoader
 from predictor.models import Exchange
+from predictor.predictor import Predictor
 from predictor.serializers import ExchangeMessageSerializer
 
 
@@ -120,3 +124,60 @@ class ExchangeLoaderTestCase(ExchangeTestMixin):
                 mock.call(start_date + datetime.timedelta(days=1)),
                 mock.call(start_date + datetime.timedelta(days=2))
             ])
+
+
+class ExchangeViewSetTestCase(APITestCase):
+    def test_get_exchanges(self):
+        today = datetime.date.today()
+        url = "%s?date=%s" % (reverse('exchanges-list'),
+                              today.isoformat())
+        # create some exchange rows
+        builder = Builder()
+        exchanges = [
+            {
+                'base': 'EUR',
+                'date': today,
+                'goal': 'USD',
+                'rate': 1
+            },
+            {
+                'base': 'EUR',
+                'date': today,
+                'goal': 'CHF',
+                'rate': 1
+            }
+        ]
+        for e in exchanges:
+            builder.exchange(
+                base=e['base'],
+                date=e['date'],
+                goal=e['goal'],
+                rate=e['rate']
+            )
+        response = self.client.get(url)
+        self.assertTrue(len(response.data) == 2)
+        item_number = 0
+        for item in response.data:
+            self.assertEqual(item.get('base'), exchanges[item_number]['base'])
+            self.assertEqual(item.get('date'), today.isoformat())
+            self.assertEqual(item.get('goal'), exchanges[item_number]['goal'])
+            self.assertEqual(Decimal(item.get('rate')),
+                             Decimal(exchanges[item_number]['rate']))
+            item_number = item_number + 1
+
+    def test_get_prediction(self):
+        url = "%s?currency=USD" % reverse('exchanges-predict')
+        # predict returns a tuple
+        predict_result = (datetime.date(2018, 10, 11), 1.1575, [1.1571],)
+        with mock.patch.object(Predictor, 'predict',
+                               return_value=predict_result) as mock_predict:
+            response = self.client.get(url)
+            self.assertTrue(mock_predict.called)
+            predicted_dict = {
+                'max_date': predict_result[0],
+                'last_rate': predict_result[1],
+                'prediction': predict_result[2][0],
+            }
+            self.assertDictEqual(response.data, predicted_dict)
+
+
