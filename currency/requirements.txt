@@ -4,3 +4,4 @@ djangorestframework
 requests
 statsmodels
 scipy
+django-semanticui-forms

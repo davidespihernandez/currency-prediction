@@ -1,5 +1,7 @@
 import datetime
 
+from django.shortcuts import render
+from django.views import View
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
@@ -30,3 +32,34 @@ class ExchangeViewSet(viewsets.ViewSet):
             'prediction': prediction[0],
         })
 
+
+class RetrieveFormView(View):
+    template_name = "predictor/retrieve.html"
+    form_class = None
+
+    def get(self, request, *args, **kwargs):
+        # form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form': None})
+
+    def post(self, request, *args, **kwargs):
+        # form = self.form_class(request.POST)
+        # if form.is_valid():
+        #     pass
+
+        return render(request, self.template_name, {'form': None})
+
+
+class ForecastFormView(View):
+    template_name = "predictor/forecast.html"
+    form_class = None
+
+    def get(self, request, *args, **kwargs):
+        # form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form': None})
+
+    def post(self, request, *args, **kwargs):
+        # form = self.form_class(request.POST)
+        # if form.is_valid():
+        #     pass
+
+        return render(request, self.template_name, {'form': None})

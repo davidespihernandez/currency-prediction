@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+{% load semanticui %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'predictor/semantic.min.css' %}">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="{% static 'predictor/semantic.min.js' %}"></script>
+    <meta charset="UTF-8">
+    <title>Exchanges</title>
+</head>
+<body>
+<div class="ui attached stackable menu">
+    <div class="ui container">
+        <a class="item" href="{% url 'retrieve' %}">
+            <i class="search icon"></i> Retrieve
+        </a>
+        <a class="item" href="{% url 'predict' %}">
+            <i class="chart line icon"></i> Predict
+        </a>
+    </div>
+</div>
+<div class="ui container" id="content">
+    {% block content %}
+        Select menu option
+    {% endblock %}
+</div>
+</body>
+</html>
