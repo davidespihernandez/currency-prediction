@@ -38,8 +38,8 @@ Use of the application:
 
 - REST views.
 	- /exchanges/?date=dd-mm-yyyy. Retrieves the loaded information for a specific day.
-	IMAGE
-	- exchanges/predict/?currency=USD. Performs a prediction for the next date, for the specified currency.
-	IMAGE
+	- /exchanges/predict/?currency=USD. Performs a prediction for the next date, for the specified currency.
 
 - Pages (MVT views)
+	- Retrieve. Allows to query the existing data for a specific date.
+	- Forecast. With the stored information, predicts the next rate for a selected currency (base is EUR always)
