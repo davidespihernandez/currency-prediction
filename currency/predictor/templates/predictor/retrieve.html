@@ -1,5 +1,22 @@
 {% extends 'predictor/base.html' %}
-{% load semanticui %}
+{% load static semanticui %}
 {% block content %}
-    Retrieve
+    <h1>
+    Retrieve information for a date
+    </h1>
+    <div class="ui segment">
+        <div class="ui grid">
+            <div class="three wide column">
+                <form class="ui form" method="POST">
+                    {% csrf_token %}
+                    {% render_form form _help=1 %}
+                    <button class="ui submit button">Retrieve</button>
+                </form>
+            </div>
+            <div class="nine wide column">
+                <h3>Data</h3>
+                <pre>{{ data }}</pre>
+            </div>
+        </div>
+    </div>
 {% endblock %}
