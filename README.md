@@ -43,3 +43,5 @@ Use of the application:
 	IMAGE
 
 - Pages (MVT views)
+	- Retrieve. Allows to query the existing data for a specific date.
+	- Forecast. With the stored information, predicts the next rate for a selected currency (base is EUR always)
