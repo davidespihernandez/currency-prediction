@@ -43,3 +43,4 @@ Use of the application:
 - Pages (MVT views)
 	- Retrieve. Allows to query the existing data for a specific date.
 	- Forecast. With the stored information, predicts the next rate for a selected currency (base is EUR always)
+	[[https://github.com/davidespihernandez/currency-prediction/blob/master/doc_images/forecast_page.png]]
