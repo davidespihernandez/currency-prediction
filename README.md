@@ -33,14 +33,14 @@ Installation:
 Use of the application:
 
 - Commands:
-	- Load data. You can execute manage.py load to load data in batch coming from the API. The command receives startdate and enddate as arguments. The command will sleep a second between calls to not overload the API. If no dates passed, the last 3 months will be loaded.
-	- Predict. You can execute manage.py predict to predict the possible value for the next date, considering the last date loaded.
+	- Load data. You can execute manage.py load to load data in batch coming from the API. The command receives startdate and enddate as arguments. The command will sleep a second between calls to not overload the API. If no dates passed, the last 3 months will be loaded. [Image](./doc_images/load_command.png)
+	- Predict. You can execute manage.py predict to predict the possible value for the next date, considering the last date loaded. [Image](./doc_images/predict_command.png)
 
 - REST views.
-	- /exchanges/?date=dd-mm-yyyy. Retrieves the loaded information for a specific day.
-	- /exchanges/predict/?currency=USD. Performs a prediction for the next date, for the specified currency.
+	- /exchanges/?date=dd-mm-yyyy. Retrieves the loaded information for a specific day. [Image](./doc_images/retrieve_rest.png)
+	- /exchanges/predict/?currency=USD. Performs a prediction for the next date, for the specified currency. [Image](./doc_images/predict_rest.png)
 
 - Pages (MVT views)
-	- Retrieve. Allows to query the existing data for a specific date.
+	- Retrieve. Allows to query the existing data for a specific date. [Image](./doc_images/retrieve_page.png)
 	- Forecast. With the stored information, predicts the next rate for a selected currency (base is EUR always)
 	[Image](./doc_images/forecast_page.png)
